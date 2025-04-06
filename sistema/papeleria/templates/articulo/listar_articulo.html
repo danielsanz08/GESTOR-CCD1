@@ -1,0 +1,105 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block titulo %}Listar articulos{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/listar_articulo.css' %}">
+<div class="fondo">
+    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+<section>
+    <form method="GET"  action="{% url 'papeleria:listar_articulo' %}">
+        <input type="text" name="q" id="buscador" placeholder="Buscar ..." class="buscador" value="{{ request.GET.q }}">
+        <button type="submit" class="btn-search"><i data-feather="search" class="icono"></i></button>
+    </form>
+<div class="Bototnes">
+    <button class="print"><i data-feather="printer"class="icono "></i></button>
+    <button class="pdf">PDF</button>
+    <button class="excel">Excel</button>
+</div>
+<h1>Articulos de papeleria</h1>
+<table>
+    <thead>
+        <tr>
+            <th class="id">ID</th>
+            <th class="nombre">Nombre</th>
+            <th class="marca">Marca</th>
+            <th class="observacion">Observacion</th>
+            <th class="precio">Precio</th>
+            <th class="estado">Registrado por</th>
+            <th class="actividad">Fecha de regiztro</th>
+            <th class="editar">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for articulo in articulos %}
+        <tr>
+            <td>{{ articulo.id }}</td>
+        <td>{{ articulo.nombre }}</td>
+        <td>{{ articulo.marca }}</td>
+        <td>{{ articulo.observacion }}</td>
+        <td>{{ articulo.precio }}</td>
+        <td>{{ articulo.registrado_por }}</td>
+        <td>{{ articulo.fecha_registro }}</td>
+        <td>
+            <a href="{% url 'papeleria:editar_articulo' articulo.id %}"><button class="editar-btn"><i data-feather="edit" class="icono"></i></button></a>
+            <button class="eliminar-btn"><i data-feather="trash-2" class="icono"></i></button>
+        </td>
+    </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">No se encontraron resultados</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="paginacion">
+    {% if articulos.has_previous %}
+        <a href="?page={{ articulos.previous_page_number }}" class="prev">Anterior</a>
+    {% endif %}
+
+    {% for num in articulos.paginator.page_range %}
+        {% if articulos.number == num %}
+            <span class="current">{{ num }}</span>
+        {% else %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if articulos.has_next %}
+        <a href="?page={{ articulos.next_page_number }}" class="next">Siguiente</a>
+    {% endif %}
+</div>
+
+</section>
+<script>
+    function buscarArticulo(){
+        let query = document.getElementById("buscador").value.trim();
+        let tbody = document.querySelector("tbody");
+        fetch(`{% url 'papeleria:buscar_articulo' %}?q=${query}`)
+        .then(response=> response.json())
+        .then(data =>{
+            tbody.innerHTML = "";
+            data.forEach(articulo => {
+                let fila = `
+                <tr>
+                    <td>${articulo.id}</td>
+                    <td>${articulo.nombre}</td>
+                    <td>${articulo.marca}</td>
+                    <p>{{ articulo.observacion_formateada }}</p
+                    <td>${articulo.precio}</td>
+                    <td>${articulo.registrado_por}</td>
+                    <td>${articulo.fecha_registro}</td>
+                    <td>
+                        <button class="editar-btn"><i data-feather="edit" class="icono"></i></button>
+                        <button class="eliminar-btn"><i data-feather="trash-2"></i></button>
+                    </td>
+                </tr>
+                `;
+                tbody.innerHTML += fila;
+            });
+            
+        })
+        .catch(error => console.error(error));
+    }
+</script>
+{% endblock%}

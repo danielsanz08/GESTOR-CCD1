@@ -1,0 +1,75 @@
+.card{
+    max-width: 550px;
+    margin: 60px auto;
+    top: 17vh;
+    border: none;
+    border-radius: 15px;
+    background: rgba(19, 104, 161, 0.411);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-body {
+    padding: 40px;
+    position: relative;
+
+}
+/*informacion del perfil*/
+.nombre, .rol, .email, .cargo{
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    display: flex;
+    align-items: baseline;
+}
+.nombre{
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    border-bottom: 2px #eaeaea;
+}
+label{
+    
+    font-weight: 600;
+    color: #1a3a1a;
+    width: 180px;
+    font-size: 15px;
+    text-align: center;
+}
+/* Botones */
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.botones button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.atras{
+    background-color: rgb(253, 45, 45);
+    color: white;
+    font-weight: bold;
+}
+.atras:hover{
+    background-color: rgb(252, 0, 0);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+.editar{
+    background-color: rgb(51, 248, 51);
+    color: white;
+    font-weight: bold;
+}
+.editar:hover{
+    background-color: rgb(0, 253, 0);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}

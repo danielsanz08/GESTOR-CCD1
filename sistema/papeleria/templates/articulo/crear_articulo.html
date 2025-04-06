@@ -1,0 +1,200 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block titulo %}Crear artículos{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/crear_articulo.css' %}?v={% now 'U' %}">
+<style>
+    .disabled { 
+        opacity: 0.5; 
+        cursor: not-allowed; 
+    }
+
+    /* Clases específicas para cada mensaje de error */
+    .error-nombre {
+        color: rgb(255, 0, 0);   /* Color rojo para los errores */
+        font-size: 14px;          /* Ajusta el tamaño de la fuente */
+        font-weight: bold;  
+        position: absolute;      /* Negrita */
+        top: 45vh;
+    }
+
+    .error-marca {
+        color: rgb(255, 0, 0);   /* Color rojo para los errores */
+        font-size: 14px;          /* Ajusta el tamaño de la fuente */
+        font-weight: bold;        /* Negrita */
+    }
+
+    .error-precio {
+        color: rgb(255, 0, 0);   /* Color rojo para los errores */
+        font-size: 14px;          /* Ajusta el tamaño de la fuente */
+        font-weight: bold;        /* Negrita */
+    }
+
+    .error-cantidad {
+        color: rgb(255, 0, 0);   /* Color rojo para los errores */
+        font-size: 14px;          /* Ajusta el tamaño de la fuente */
+        font-weight: bold;        /* Negrita */
+        position: absolute;
+        height: -5vh;
+    }
+
+    .error-observacion {
+        color: rgb(255, 0, 0);   /* Color rojo para los errores */
+        font-size: 14px;          /* Ajusta el tamaño de la fuente */
+        font-weight: bold;        /* Negrita */
+    }
+
+    /* Puedes agregar más estilos específicos si lo necesitas */
+    #nombre_error {
+        position: absolute;
+        top: 26vh;
+        left: 9vh;
+    }
+
+    #marca_error {
+        position: absolute;
+        top: 32vh;
+        left: 9vh;
+    }
+
+    #precio_error, #cantidad_error, #observacion_error {
+        font-size: 14px;
+    }
+</style>
+<div class="fondo">
+    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+<div class="formulario">
+    <h2>Crear artículo</h2>
+    <form method="POST" id="form_articulo">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del artículo</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" required autocomplete="off" placeholder="Digite el nombre del artículo">
+            <div id="nombre_error" class="error-nombre"></div>
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Digite el tipo de articulo</label>
+            <input type="text" name="tipo" id="tipo" placeholder="Digite el tipo del artículo">
+            
+        </div>
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca del artículo</label>
+            <input type="text" name="marca" id="marca" class="form-control" required autocomplete="off" placeholder="Digite la marca del artículo">
+            <div id="marca_error" class="error-marca"></div>
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Digite el precio</label>
+            <input type="text" name="precio" id="precio" placeholder="Digite el precio del artículo">
+            <div id="precio_error" class="error-precio"></div>
+        </div>
+        <div class="mb-3">
+            <label for="cantidad" class="form-label">Digite la cantidad</label>
+            <input type="number" name="cantidad" id="cantidad" placeholder="Digite la cantidad del artículo">
+            <div id="cantidad_error" class="error-cantidad"></div>
+        </div>
+        <div class="mb-3">
+            <label for="observacion" class="form-label">Observación del artículo</label>
+            <input type="text" name="observacion" id="observacion" class="form-control" placeholder="Digite alguna observación del artículo">
+            <div id="observacion_error" class="error-observacion"></div>
+        </div>
+        <button type="submit" class="btn disabled" id="submit_btn" disabled>Registrar artículo</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Funciones de validación
+    const validateNombre = () => {
+        const nombre = $('#nombre').val();
+        const regex = /^[a-zA-Z\s]+$/; // Solo letras y espacios
+        if (nombre && !regex.test(nombre)) {
+            $('#nombre_error').text('Solo se permiten letras y espacios.');
+            return false;
+        } else {
+            $('#nombre_error').text('');
+            return true;
+        }
+    };
+
+    const validateMarca = () => {
+        const marca = $('#marca').val();
+        const regex = /^[a-zA-Z\s]+$/; // Solo letras y espacios
+        if (marca && !regex.test(marca)) {
+            $('#marca_error').text('Solo se permiten letras y espacios.');
+            return false;
+        } else {
+            $('#marca_error').text('');
+            return true;
+        }
+    };
+
+    const validatePrecio = () => {
+        const precio = $('#precio').val();
+        const regex = /^[0-9]+$/; // Solo números
+        if (precio && !regex.test(precio)) {
+            $('#precio_error').text('Solo se permiten números.');
+            return false;
+        } else {
+            $('#precio_error').text('');
+            return true;
+        }
+    };
+
+    const validateCantidad = () => {
+        const cantidad = $('#cantidad').val();
+        if (cantidad < 1) {
+            $('#cantidad_error').text('La cantidad no puede ser menor a 1.');
+            return false;
+        } else {
+            $('#cantidad_error').text('');
+            return true;
+        }
+    };
+
+    const validateObservacion = () => {
+        const observacion = $('#observacion').val();
+        $('#observacion_error').text('');
+        return true;
+    };
+
+    const enableSubmitButton = () => {
+        const isValid = validateNombre() && validateMarca() && validatePrecio() && validateCantidad() && validateObservacion();
+        const submitBtn = $('#submit_btn');
+        if (isValid) {
+            submitBtn.removeClass('disabled').prop('disabled', false);
+        } else {
+            submitBtn.addClass('disabled').prop('disabled', true);
+        }
+    };
+
+    // Validación en tiempo real
+    $('#nombre, #marca, #precio, #cantidad, #observacion').on('input', function() {
+        enableSubmitButton();
+    });
+
+    // AJAX para verificar si el nombre del artículo ya está registrado
+    $('#nombre').on('input', function() {
+        const nombre = $('#nombre').val();
+        if (nombre.length > 2) {  // Verifica solo después de digitar más de 2 caracteres
+            $.ajax({
+                url: '{% url "papeleria:validar_datos" %}',  // Cambia esta URL según tu vista
+                method: 'GET',
+                data: { tipo: 'nombre', valor: nombre },  // Enviar tipo y valor
+                success: function(response) {
+                    if (response.nombre) {
+                        $('#nombre_error').text(response.nombre);
+                    } else {
+                        $('#nombre_error').text('');
+                    }
+                }
+            });
+        }
+    });
+
+    $(document).ready(function() {
+        enableSubmitButton();
+    });
+</script>
+
+{% endblock %}

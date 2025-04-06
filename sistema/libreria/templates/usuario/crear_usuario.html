@@ -1,0 +1,320 @@
+{% extends "navbar.html" %}
+{% load static %}
+
+
+{% block titulo %}
+Crear usuario papelería
+{% endblock %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/crear_usuario.css' %}?v={% now 'U' %}">
+<style>
+    .error-nombre,
+    .error-cargo,
+    .error-email,
+    .error-password {
+
+        font-size: 14px;
+        font-weight: bold;
+        position: absolute;
+    }
+
+    .error-nombre {
+        color: rgb(255, 0, 0);
+        top: 26vh;
+        left: 9vh;
+    }
+
+    .error-cargo {
+        top: 26vh;
+        right: 14vh;
+        color: rgb(255, 0, 0);
+    }
+
+    .error-email {
+        top: 48vh;
+        left: 9vh;
+        color: rgb(255, 0, 0);
+    }
+
+    .error-password {
+        top: 8vh;
+        left: 0.5vh;
+        color: red;
+    }
+
+    /* Estilo del botón */
+    button[type="submit"] {
+        background-color: rgb(0, 58, 218);
+        color: white;
+        font-weight: bold;
+        border: none;
+        height: 6vh;
+        width: 35vh;
+        border-radius: 20px;
+        position: relative;
+        left: 3vh;
+        bottom: -1vh;
+        cursor: pointer;
+    }
+    .alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Desvanecer después de 5 segundos */
+.alert {
+    animation: fadeIn 0.5s ease-in-out forwards, fadeOut 0.5s ease-in-out 4.5s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+    .error_rol {
+    display: block;
+    background-color: #ffebee; /* Fondo rojo claro */
+    color: #d32f2f; /* Texto rojo oscuro */
+    border: 1px solid #f44336; /* Borde rojo */
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative; /* Cambiado de absoluto a relativo para que fluya con el formulario */
+}
+
+    /* Estilo cuando el botón es hover */
+    button[type="submit"]:hover {
+        background-color: rgb(33, 74, 187);
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+    }
+
+    /* Estilo cuando el botón está deshabilitado */
+    button[type="submit"]:disabled {
+        background-color: #cccccc;
+        /* Color de fondo gris */
+        color: #666666;
+        cursor: not-allowed;
+        /* Cambia el cursor a no permitido */
+        border: none;
+        height: 6vh;
+        width: 35vh;
+        border-radius: 20px;
+        position: relative;
+        left: 3vh;
+        bottom: -1vh;
+    }
+    #id_roles_error { /* Asegúrate de que este sea el ID correcto */
+    display: inline;
+    color: red;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+    /* Personaliza más aquí los estilos de cada clase según tu preferencia */
+</style>
+
+<div class="fondo">
+    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+<div class="formulario">
+    <h2>Crear Usuario</h2>
+    <form id="userForm" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" class="form-control" required autocomplete="off"
+                placeholder="Ingrese su usuario">
+                <div id="error-nombre" class="error-nombre"></div>
+        </div>
+        <div class="mb-3">
+            <label for="module" class="form-label">Módulo:</label>
+            <select id="module" name="module" class="form-select" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="Papeleria">Papeleria</option>
+                <option value="Cafeteria">Cafeteria</option>
+                <option value="Centro de eventos">Centro de eventos</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Rol:</label>
+            <select id="role" name="role" class="form-select" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="Administrador">Administrador</option>
+                
+                <option value="Empleado">Empleado</option>
+            </select>
+        </div>
+        
+    
+        <div class="mb-3">
+            <label for="cargo" class="form-label">Cargo:</label>
+            <input type="text" id="cargo" name="cargo" class="form-control" required autocomplete="off"
+                placeholder="Ingrese su cargo">
+                <div id="error-cargo" class="error-cargo"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo:</label>
+            <input type="email" id="email" name="email" class="form-control" required autocomplete="off"
+                placeholder="Ingrese su correo">
+                <div id="error-email" class="error-email"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input type="password" id="password" name="password" class="form-control" required
+                autocomplete="new-password" placeholder="Ingrese su contraseña">
+                <div id="error-password" class="error-password"></div>
+        </div>
+
+        <button type="submit" class="btn">Guardar Usuario</button>
+    </form>
+</div>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert" style="color: rgb(255, 0, 0); font-weight: bold; background-color: rgb(245, 134, 134); width: 40vh; align-items: center; left: 85vh; position: absolute; top: 20vh;"  >
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const username = document.getElementById('username');
+    const cargo = document.getElementById('cargo');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const role = document.getElementById('role');
+    const form = document.getElementById('userForm');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const moduleSelect = document.getElementById('module');
+    const errorUsername = document.getElementById('error-nombre');
+    const errorCargo = document.getElementById('error-cargo');
+    const errorEmail = document.getElementById('error-email');
+    const errorPassword = document.getElementById('error-password');
+    
+    // Crear elemento para mensaje de error de rol
+    const errorRole = document.createElement('div');
+    errorRole.classList.add('error_rol');
+    errorRole.style.display = 'none';
+    errorRole.style.color = 'red';
+    errorRole.style.fontWeight = 'bold';
+    role.parentNode.appendChild(errorRole);
+
+    // Deshabilitar el botón de envío al cargar la página
+    submitButton.disabled = true;
+
+    // Función para validar el formulario completo
+    function validateForm() {
+        const isUsernameValid = username.value.length >= 3 && !errorUsername.textContent;
+        const isCargoValid = cargo.value.length >= 5 && !errorCargo.textContent;
+        const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value) && !errorEmail.textContent;
+        const isPasswordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/.test(password.value) && !errorPassword.textContent;
+        const isRoleValid = role.value !== "" && errorRole.style.display === 'none';
+        const isModuleValid = moduleSelect.value !== "";
+
+        // Verificar si todos los campos son válidos
+        const allFieldsValid = isUsernameValid && isCargoValid && isEmailValid && 
+                                isPasswordValid && isRoleValid && isModuleValid;
+        
+        submitButton.disabled = !allFieldsValid;
+    }
+
+    // Validación de Nombre de Usuario
+    username.addEventListener('input', function () {
+        if (username.value.length < 3) {
+            errorUsername.textContent = "Mínimo 3 caracteres";
+        } else {
+            errorUsername.textContent = "";
+        }
+        username.value = username.value.replace(/[0-9]/g, "");
+        validateForm();
+    });
+
+    // Validación de Cargo
+    cargo.addEventListener('input', function () {
+        if (cargo.value.length < 5) {
+            errorCargo.textContent = "El cargo debe tener al menos 5 caracteres";
+        } else {
+            errorCargo.textContent = "";
+        }
+        cargo.value = cargo.value.replace(/[0-9]/g, "");
+        validateForm();
+    });
+
+    // Validación de Correo
+    email.addEventListener('input', function () {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(email.value)) {
+            errorEmail.textContent = "Formato no válido";
+            validateForm();
+            return;
+        } else {
+            errorEmail.textContent = "";
+        }
+
+        fetch('/validar_datos/?email=' + encodeURIComponent(email.value))
+            .then(response => response.json())
+            .then(data => {
+                if (data.email === true) {
+                    errorEmail.textContent = "Email en uso";
+                } else {
+                    errorEmail.textContent = "";
+                }
+                validateForm();
+            })
+            .catch(error => console.error('Error en la validación:', error));
+    });
+
+    // Validación de Contraseña
+    password.addEventListener('input', function () {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+        if (!passwordRegex.test(password.value)) {
+            errorPassword.textContent = "Debe contener 1 mayúscula, 1 minúscula, números y un signo de puntuación";
+        } else {
+            errorPassword.textContent = "";
+        }
+        validateForm();
+    });
+
+    
+
+    // Validar todos los campos inicialmente
+    validateForm();
+});
+</script>
+{% endblock %}

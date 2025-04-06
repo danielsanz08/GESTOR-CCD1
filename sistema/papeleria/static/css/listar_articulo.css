@@ -1,0 +1,274 @@
+html{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section{
+    background: rgba(19, 104, 161, 0.411);
+    position: relative;
+    top: 15vh;
+    text-align: center;
+    padding: 10px 20px 20px 20px;
+    width: 190vh;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    
+}
+table{
+    width: 180vh;
+    border-spacing: 10px;
+    
+}
+.id, .nombre, .cargo, .rol,.actividad, .estado, .editar{
+    left: 20vh;
+    background-color: rgba(61, 43, 226, 0.411);
+    border-radius: 10px;
+}
+.correo{
+    
+    background-color: rgba(61, 43, 226, 0.411);
+    border-radius: 10px;
+    width: 50vh;
+}
+td{
+    background-color: rgba(46, 151, 151, 0.384);
+    margin: 20vh 0 20vh 0;
+    border-radius: 10px;
+    height: 5vh;
+    align-items: center;
+    
+}
+/* Toggle Switch Container */
+.cl-toggle-switch {
+    position: relative;
+  }
+  
+  /* Switch Element */
+  .cl-switch {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Input */
+  .cl-switch > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    right: 6px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(0, 0, 0, 0.38);
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s 0.1s, transform 0.2s 0.1s;
+  }
+  
+  /* Track */
+  .cl-switch > span::before {
+    content: "";
+    display: inline-block;
+    margin: 5px 0 5px 10px;
+    border-radius: 7px;
+    width: 36px;
+    height: 14px;
+    background-color: rgb(0, 0, 0, 0.38);
+    vertical-align: top;
+    transition: background-color 0.2s, opacity 0.2s;
+  }
+  
+  /* Thumb */
+  .cl-switch > span::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 16px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  /* Checked State */
+  .cl-switch > input:checked {
+    right: -10px;
+    background-color: #85b8b7;
+  }
+  
+  .cl-switch > input:checked + span::before {
+    background-color: #85b8b7;
+  }
+  
+  .cl-switch > input:checked + span::after {
+    background-color: #018786;
+    transform: translateX(16px);
+  }
+  
+  /* Hover, Focus */
+  .cl-switch:hover > input {
+    opacity: 0.04;
+  }
+  
+  .cl-switch > input:focus {
+    opacity: 0.12;
+  }
+  
+  .cl-switch:hover > input:focus {
+    opacity: 0.16;
+  }
+  
+  /* Active State */
+  .cl-switch > input:active {
+    opacity: 1;
+    transform: scale(0);
+    transition: transform 0s, opacity 0s;
+  }
+  
+  .cl-switch > input:active + span::before {
+    background-color: #8f8f8f;
+  }
+  
+  .cl-switch > input:checked:active + span::before {
+    background-color: #85b8b7;
+  }
+  
+  /* Disabled State */
+  .cl-switch > input:disabled {
+    opacity: 0;
+  }
+  
+  .cl-switch > input:disabled + span::before {
+    background-color: #ddd;
+  }
+  
+  .cl-switch > input:checked:disabled + span::before {
+    background-color: #bfdbda;
+  }
+  
+  .cl-switch > input:checked:disabled + span::after {
+    background-color: #61b5b4;
+  }
+  .editar-btn{
+    background-color: rgb(233, 200, 12);
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .editar-btn:hover{
+    background-color: rgb(159, 170, 11);
+    
+  }
+  .eliminar-btn{
+    background-color: rgb(233, 12, 12);
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .eliminar-btn:hover{
+    background-color: rgb(170, 11, 11);
+    
+  }
+  .icono{
+    height: 3vh;
+  }
+  
+  .paginacion {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.paginacion a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.paginacion a:hover {
+    background-color: #0056b3;
+}
+
+.paginacion span {
+    margin: 0 10px;
+}
+.buscador{
+    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    height: 5vh;
+    width: 50vh;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.btn-search{
+    background-color: #0056b3;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    position: relative;
+    top: 1vh;
+    width: 50px;
+    text-align: center;
+}
+.btn-search:hover{
+    background-color: #044080;
+   
+}
+.Botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 60vh;
+    top: 4vh;
+}
+.print{
+    background-color: yellow;
+    border: none;
+    width: 20vh;
+    border-radius: 20px;
+    margin-right: 1vh;
+}
+.print:hover{
+    background-color: rgb(190, 190, 3);
+}
+.pdf{
+    background-color: rgb(255, 0, 0);
+    border: none;
+    width: 20vh;
+    height: 25px;
+    border-radius: 20px;
+    position: relative;
+    top: -0.5vh;
+    margin-right: 1vh;
+    margin-left: 1vh;
+}
+.pdf:hover{
+    background-color: rgb(187, 3, 3);
+}
+.excel{
+    background-color: rgb(0, 255, 13);
+    border: none;
+    width: 20vh;
+    height: 25px;
+    border-radius: 20px;
+    position: relative;
+    top: -0.5vh;
+    margin-left: 1vh;
+}
+.excel:hover{
+    background-color: rgb(4, 187, 13);
+}

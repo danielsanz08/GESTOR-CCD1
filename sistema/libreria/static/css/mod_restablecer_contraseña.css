@@ -1,0 +1,163 @@
+/*PASSWORD_RESET.HTML*/
+.card_reset {
+    background: rgba(19, 104, 161, 0.411);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 40px;
+    text-align: center;
+    width: 80vh;
+    padding: 20px;
+    height: 43vh;
+}
+input{
+    background-color: rgb(253, 253, 253);
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    width: 75vh;
+    margin: 20px 20px 20px 20px;
+    text-align: center;
+    right: 5vh;
+    position: relative;
+    bottom: 7vh;
+
+}
+input:hover, input.activate{
+    background-color: rgb(189, 188, 187);
+}
+.boton{
+    background-color: rgb(0, 58, 218);
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 6vh;
+    width: 35vh;
+    border-radius: 20px;
+    position: relative;
+    left: 8vh;
+    bottom: 5vh;
+    
+}
+.mensaje{
+    left: 2vh;
+    top: 1vh;
+    position: relative;
+}
+.boton:hover{
+    background-color: rgb(33, 74, 187);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+/*PASSWORD_RESET-DONE*/
+.card-done{
+    background: rgba(19, 104, 161, 0.411);
+    position: relative;
+    top: 27vh;
+    left: 50vh;
+    border-radius: 40px;
+    text-align: center;
+    width: 100vh;
+    padding: 20px 20px 20px 20px;
+}
+
+
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+a:hover{
+    color: black;
+}
+@keyframes move-check {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.check-icon {
+    font-size: 50px;
+    color: #28a745;
+    display: inline-block;
+    animation: move-check 0.8s ease-out;
+}
+/*PASSWORD_rESET_CONFIRM*/
+.card-confirm {
+    background: rgba(19, 104, 161, 0.411);
+    text-align: center;
+    position: relative;
+    top: 23vh;
+    width: 70vh;
+    left: 80vh;
+    border-radius: 20px;
+    height: 60vh;
+}
+input{
+    background-color: rgb(252, 252, 252);
+}
+form{
+    background: rgba(19, 104, 161, 0);
+    width: 50vh;
+    position: relative;
+    left: 6vh;
+    height: 50vh;
+    top: 5vh;
+    
+    
+}
+label{
+    text-align: right;
+}
+.btn{
+    background-color: rgb(51, 104, 248);
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 6vh;
+    width: 35vh;
+    border-radius: 20px;
+    position: relative;
+    left: 3.5vh;
+    
+}
+.btn:hover{
+    background-color: rgb(33, 74, 187);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+/*PASSWORF_RESET_COMPLETE*/
+.container{
+    background: rgba(19, 104, 161, 0.411);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 40px;
+    text-align: center;
+    width: 80vh;
+    padding: 20px;
+    height: 43vh;
+}
+.boton{
+    background-color: rgb(51, 104, 248);
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 6vh;
+    width: 35vh;
+    border-radius: 20px;
+    position: relative;
+    left: 1vh;
+    top: 6vh;
+}

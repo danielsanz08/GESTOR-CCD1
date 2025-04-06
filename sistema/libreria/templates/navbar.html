@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titulo %}CCD SOFTWARE{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'imagen/LOGO.png' %}">
+  <link href="{% static 'css/navbar.css' %}?v={% now 'U' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+</head>
+<style>
+  .navbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 31, 63, 0);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1000;
+    height: 65px;
+    justify-content: center;
+    align-items: center;
+}
+.breadcrumb {
+    background: transparent;
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #007bff;
+    position: relative;
+  bottom: 58.7vh;
+  text-align: center;
+}
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #007bff;
+}
+.breadcrumb-item.active {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+</style>
+<div class="fondo">
+  <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+<body>
+  <div class="navbar">
+    Gestor CCD
+  </div>
+
+  <div class="container">
+    {% block contenido %}
+    {% endblock %}
+  </div>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {% for crumb in breadcrumbs %}
+            {% if forloop.last %}
+                <li class="breadcrumb-item active" aria-current="page">{{ crumb.name }}</li>
+            {% else %}
+                <li class="breadcrumb-item"><a href="{{ crumb.url }}">{{ crumb.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</nav>
+
+  
+  <footer>
+    <p>© 2025 CCD</p>
+  </footer>
+  <button id="toggle-accessibility-menu" title="Botón de accesibilidad">
+    <i class="bi bi-list fs-1" id="simbolo"></i>
+  </button>
+
+  <div id="accessibility-menu" class="hidden">
+    <div id="zoom-controls" class="menu-option">
+      <button class="zoom-button" id="zoom-in" title="Aumentar zoom">+</button>
+      <button class="zoom-button" id="zoom-out" title="Disminuir zoom">-</button>
+      <button class="zoom-reset" id="zoom-reset" title="Restablecer zoom">⟳</button>
+      <span id="zoom-percentage">100%</span>
+    </div>
+
+    <div class="op">
+      <button class="dark-mode">🌙||🌞 Modo Oscuro</button>
+      <button class="monocromo">🔘Modo Monocromo</button>
+      <button class="titulos">Resaltar titulos</button>
+      <button class="enlaces">Resaltar resaltes</button>
+      <div id="zoom-controls" class="menu-option">
+        <button class="zoom-button" id="zoom-in" title="Aumentar zoom">+</button>
+        <button class="zoom-button" id="zoom-out" title="Disminuir zoom">-</button>
+        <button class="zoom-reset" id="zoom-reset" title="Restablecer zoom">⟳</button>
+        <span id="zoom-percentage">100%</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButton = document.getElementById("toggle-accessibility-menu");
+      const menu = document.getElementById("accessibility-menu");
+
+      toggleButton.addEventListener("click", function () {
+        menu.classList.toggle("visible"); // Agrega o quita la clase visible
+      });
+    });
+  </script>
+
+
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+  </script>
+
+
+</body>
+
+</html>

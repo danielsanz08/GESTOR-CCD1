@@ -1,0 +1,42 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block titulo %}Editar articulos{% endblock %}
+{% block contenido %}
+<div class="fondo">
+    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+<div class="formulario">
+    <h2>Editar artículo</h2>
+    <form method="POST" id="form_articulo" action="{% url 'papeleria:editar_articulo' articulo.id %}">
+
+
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del artículo</label>
+            {{ form.nombre }}
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Digite el tipo de articulo</label>
+            {{ form.tipo }}
+            
+        </div>
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca del artículo</label>
+            {{ form.marca}}
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Digite el precio</label>
+            {{ form.precio }}
+        </div>
+        <div class="mb-3">
+            <label for="cantidad" class="form-label">Digite la cantidad</label>
+            {{ form.cantidad }}
+        </div>
+        <div class="mb-3">
+            <label for="observacion" class="form-label">Observación del artículo</label>
+            {{ form.observacion }}
+        </div>
+        <button type="submit">Editar artículo</button>
+    </form>
+</div>
+{% endblock%}
