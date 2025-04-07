@@ -3,11 +3,11 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-app_name = 'cafeteria'
+app_name = 'cde'
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
-     path('login_cde/', views.login_papeleria, name='login_cde'),
-    path('logout_cde/', views.logout_view, name='logout_cde'),
+    path('index_cde/', views.index_cde, name='index_cde'),
+    path('login_cde/', views.login_cde, name='login_cde'),
+    path('logout_cde/', views.logout_cde, name='logout_cde'),
 ]
 
 if settings.DEBUG:

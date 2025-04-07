@@ -1,37 +1,72 @@
-{% extends "navbar.html" %}
+{% extends 'navbar.html' %}
 {% load static %}
-{% block titulo %}
-  CCD
-{% endblock %}
+
+{% block titulo %}Inicio{% endblock %}
 
 {% block contenido %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}?v={% now 'U' %}">
-  <div class="fondo">
+<link rel="stylesheet" href="{% static 'css/index_pap.css' %}?v={% now 'U' %}">
+
+<div class="fondo">
     <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
-  </div>  <!-- Agregar el fondo al inicio -->
-  
-  <a href="{% url 'libreria:login_papeleria' %}  "><div class="container">
-    <div class="card">
-      <img src="https://previews.123rf.com/images/itakdalee/itakdalee1609/itakdalee160900037/63681824-papeler%C3%ADa-escolar-sobre-un-fondo-blanco-de-madera-y-espacio-para-texto.jpg" alt="Imagen de la tarjeta">
-      <h2>Papeleria</h2>
-      <p>Ingresa para gestión el módulo de papeleria</p>
+</div>
+<div class="uno">
+    <a href="{% url 'libreria:crear_usuario' %}"><div class="opcion">
+        <i data-feather="user-plus" class="icono"></i>
+        <span>Crear usuario</span>
     </div></a>
-    <div class="card">
-      <img src="https://pqs.pe/wp-content/uploads/2016/08/pqs-como-abrir-cafeteria-800x533.jpg" alt="Imagen de la tarjeta">
-      <h2>Cafetería</h2>
-      <p>Ingresa para gestionar la Cafetería</p>
-    </div>
-    <div class="card">
-      <img src="https://eltesoro.com.co/wp-content/uploads/2020/08/hall-2-banquete-capacidad-70px.jpg" alt="Imagen de la tarjeta">
-      <h2>Centro de eventos</h2>
-      <p>Ingresa para gestionar centro de eventos</p>
-    </div>
+    <a href="#">
+        <div class="opcion">
+            <i data-feather="plus-square" class="icono"></i>
+            <span>Ver perfil</span>
+        </div>
+    </a>
     
-    <div class="card">
-      <img src="https://static.vecteezy.com/system/resources/previews/013/259/795/non_2x/tiny-people-with-guide-instructions-or-handbooks-cartoon-characters-reading-user-manual-guidebook-or-guidance-help-and-book-with-instructions-for-use-concept-vector.jpg" alt="Imagen de la tarjeta">
-      <h2>Manual de usuario</h2>
-      <p>Mira el manual de usuario</p>
+    <a href="#">
+        <div class="opcion">
+            <i data-feather="users" class="icono"></i>
+            <span>Lista de usuarios</span>
+        </div>
+    </a>
+    <a href="#"><div class="opcion">
+        <i data-feather="user-plus" class="icono"></i>
+        <span>Crear articulo</span>
+    </div></a>
+    <a href="#">
+        <div class="opcion">
+            <i data-feather="package" class="icono"></i>
+            <span>Listar articulos</span>
+        </div>
+    </a>
+    <div class="opcion">
+        <i data-feather="refresh-ccw" class="icono"></i>
+        <span>Movimientos</span>
     </div>
-  </div>
-  
+    <div class="opcion">
+        <i data-feather="briefcase" class="icono"></i>
+        <span></span>
+    </div>
+    <div class="opcion">
+        <i data-feather="alert-triangle" class="icono"></i>
+        <span>Articulos con bajo stock</span>
+    </div>
+    <div class="opcion">
+        <i data-feather="bar-chart" class="icono"></i>
+        <span>Estadisticas</span>
+    </div>
+    <div class="opcion">
+        <i data-feather="lock" class="icono"></i>
+        <span>Cambiar contraseña</span>
+    </div>
+    <a href="{% url 'papeleria:logout_view' %}">
+        <div class="opcion">
+            <i data-feather="log-out" class="icono"></i>
+            <span>Salir</span>
+        </div>
+    </a>
+</div>
+
+<script>
+    feather.replace();
+</script>
+
 {% endblock %}

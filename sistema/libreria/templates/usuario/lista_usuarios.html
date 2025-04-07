@@ -1,0 +1,124 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block titulo %}Lista de usuarios{% endblock %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/lista_usuarios.css' %}?v={% now 'U' %}">
+
+<div class="fondo">
+    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+
+<section>
+    <form method="GET" action="{% url 'libreria:lista_usuarios' %}">
+        <input type="text" name="q" id="buscador" placeholder="Buscar ..." class = "buscador "value="{{ request.GET.q }}">
+        <button type="submit" class="btn-search"><i data-feather="search" class="icono"></i></button>
+    </form>
+    
+    <div class="Botones">
+        <button class="print"><i data-feather="printer" class="icono"></i></button>
+        <button class="pdf">PDf</button>
+        <button class="excel">Excel</button>
+    </div>
+    
+    <h1>Usuarios de Papelería</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="id">ID</th>
+                <th class="nombre">Nombre</th>
+                <th class="rol">Rol</th>
+                <th class="correo">Correo</th>
+                <th class="modulo">Módulo</th>
+                <th class="cargo">Cargo</th>
+                <th class="estado">Estado</th>
+                <th class="actividad">Actividad</th>
+                <th class="editar">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.role }}</td>
+                
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.module }}</td>
+                <td>{{ usuario.cargo }}</td>
+                <td>{% if usuario.is_active %}Activo{% else %}Inactivo{% endif %}</td>
+                <td>
+                    <form action="{% url 'libreria:cambiar_estado_usuario' usuario.id %}" method="POST">
+                        {% csrf_token %}
+                        <label class="cl-switch">
+                            <input type="checkbox" name="is_active" {% if usuario.is_active %}checked{% endif %} onchange="this.form.submit()">
+                            <span></span>
+                        </label>
+                    </form>
+                </td>
+                <td><button class="editar-btn"><i data-feather="edit" class="icono"></i></button></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No se encontraron usuarios.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    <div class="paginacion">
+        {% if usuarios.has_previous %}
+            <a href="?page=={{ usuarios.previous_page_number }}">Anterior</a>
+        {% endif %}
+        {% for num in usuarios.paginator.page_range %}
+            <a href="?page={{ num }}" class="{% if usuarios.number == num %}active {% endif %}">
+                {{ num }}
+            </a>
+        {% endfor %}
+        {% if usuarios.has_next %}
+        <a href="?page={{ usuarios.next_page_number }}">Siguiente</a>
+    
+        {% endif  %}
+    </div>
+</section>
+<script>
+    function buscarUsuarios() {
+        let query = document.getElementById("buscador").value.trim(); // Obtener texto del input
+        let tbody = document.querySelector("tbody");
+    
+        fetch(`/buscar_usuarios/?q=${query}`)  // Llamar a la API de Django
+            .then(response => response.json()) // Convertir respuesta a JSON
+            .then(data => {
+                tbody.innerHTML = ""; // Limpiar tabla antes de mostrar resultados
+                
+                data.forEach(usuario => {
+                    let fila = `
+                        <tr>
+                            <td>${usuario.id}</td>
+                            <td>${usuario.username}</td>
+                            <td>${usuario.role}</td>
+                            <td>${usuario.email}</td>
+                            <td>${usuario.area}</td>
+                            <td>${usuario.is_active ? "Activo" : "Inactivo"}</td>
+                            <td>
+                                <form action="/cambiar_estado_usuario/${usuario.id}/" method="POST">
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                    <label class="cl-switch">
+                                        <input type="checkbox" ${usuario.is_active ? "checked" : ""} onchange="this.form.submit()">
+                                        <span></span>
+                                    </label>
+                                </form>
+                            </td>
+                            <td><button class="editar-btn"><i data-feather="edit" class="icono"></i></button></td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += fila;
+                });
+            })
+            .catch(error => console.error("Error en la búsqueda:", error));
+    }
+    </script>
+    
+
+{% endblock %}

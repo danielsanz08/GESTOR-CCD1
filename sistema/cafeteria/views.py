@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse
-from .forms import LoginForm 
+from cafeteria.forms import LoginForm 
+from django.contrib.auth import get_user_model
 def index_caf(request):
     return render(request, 'index_caf/index_caf.html')
 # Create your views here.
@@ -18,7 +19,7 @@ def login_cafeteria(request):
                 if user.module == 'Cafeteria':  # Verifica que el usuario pertenece a Cafetería
                     login(request, user)
                     messages.success(request, "Sesión iniciada correctamente en Cafetería.")
-                    return redirect('index_caf')  # Redirige a la página de inicio de Cafetería
+                    return redirect('cafeteria:index_caf')
                 else:
                     messages.error(request, "No tienes acceso a este módulo.")
             else:

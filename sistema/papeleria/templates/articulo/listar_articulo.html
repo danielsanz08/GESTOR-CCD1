@@ -42,7 +42,7 @@
         <td>{{ articulo.fecha_registro }}</td>
         <td>
             <a href="{% url 'papeleria:editar_articulo' articulo.id %}"><button class="editar-btn"><i data-feather="edit" class="icono"></i></button></a>
-            <button class="eliminar-btn"><i data-feather="trash-2" class="icono"></i></button>
+            <a href="{% url 'papeleria:eliminar_articulo' articulo.id %}"><button class="eliminar-btn"><i data-feather="trash-2" class="icono"></i></button></a>
         </td>
     </tr>
         {% empty %}

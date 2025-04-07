@@ -6,31 +6,94 @@
 {% block contenido %}
 <link rel="stylesheet" href="{% static 'css/index_pap.css' %}?v={% now 'U' %}">
 
-<div class="fondo">
-    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
-</div>
+{% if request.user.role == 'Administrador' %}
 <div class="uno">
-    <a href="{% url 'libreria:crear_usuario' %}"><div class="opcion">
-        <i data-feather="user-plus" class="icono"></i>
-        <span>Crear usuario</span>
-    </div></a>
+    <a href="{% url 'libreria:crear_usuario' %}">
+        <div class="opcion">
+            <i data-feather="user-plus" class="icono"></i>
+            <span>Crear usuario</span>
+        </div>
+    </a>
+    <a href="{% url 'libreria:ver_usuario' user.id %}">
+        <div class="opcion">
+            <i data-feather="plus-square" class="icono"></i>
+            <span>Ver perfil</span>
+        </div>
+    </a>
+
+    <a href="{% url 'libreria:lista_usuarios' %}">
+        <div class="opcion">
+            <i data-feather="users" class="icono"></i>
+            <span>Lista de usuarios</span>
+        </div>
+    </a>
+    <a href="{% url 'papeleria:crear_articulo' %}">
+        <div class="opcion">
+            <i data-feather="user-plus" class="icono"></i>
+            <span>Crear articulo</span>
+        </div>
+    </a>
+    <a href="{% url 'papeleria:listar_articulo' %}">
+        <div class="opcion">
+            <i data-feather="package" class="icono"></i>
+            <span>Listar articulos</span>
+        </div>
+    </a>
+    <div class="opcion">
+        <i data-feather="refresh-ccw" class="icono"></i>
+        <span>Movimientos</span>
+    </div>
+    <div class="opcion">
+        <i data-feather="briefcase" class="icono"></i>
+        <span></span>
+    </div>
+    <div class="opcion">
+        <i data-feather="alert-triangle" class="icono"></i>
+        <span>Articulos con bajo stock</span>
+    </div>
+    <div class="opcion">
+        <i data-feather="bar-chart" class="icono"></i>
+        <span>Estadisticas</span>
+    </div>
+    <div class="opcion">
+        <i data-feather="lock" class="icono"></i>
+        <span>Cambiar contraseña</span>
+    </div>
+    <a href="{% url 'papeleria:logout_view' %}">
+        <div class="opcion">
+            <i data-feather="log-out" class="icono"></i>
+            <span>Salir</span>
+        </div>
+    </a>
+</div>
+{% endif %}
+{% if request.user.role == 'Empleado' %}
+<div class="uno">
+    <a href="{% url 'libreria:crear_usuario' %}">
+        <div class="opcion">
+            <i data-feather="user-plus" class="icono"></i>
+            <span>Crear usuario</span>
+        </div>
+    </a>
     <a href="#">
         <div class="opcion">
             <i data-feather="plus-square" class="icono"></i>
             <span>Ver perfil</span>
         </div>
     </a>
-    
+
     <a href="#">
         <div class="opcion">
             <i data-feather="users" class="icono"></i>
             <span>Lista de usuarios</span>
         </div>
     </a>
-    <a href="#"><div class="opcion">
-        <i data-feather="user-plus" class="icono"></i>
-        <span>Crear articulo</span>
-    </div></a>
+    <a href="#">
+        <div class="opcion">
+            <i data-feather="user-plus" class="icono"></i>
+            <span>Crear articulo</span>
+        </div>
+    </a>
     <a href="#">
         <div class="opcion">
             <i data-feather="package" class="icono"></i>
@@ -57,13 +120,16 @@
         <i data-feather="lock" class="icono"></i>
         <span>Cambiar contraseña</span>
     </div>
-    <a href="{% url 'libreria:logout_view' %}">
+    <a href="{% url 'papeleria:logout_view' %}">
         <div class="opcion">
             <i data-feather="log-out" class="icono"></i>
             <span>Salir</span>
         </div>
     </a>
 </div>
+{% endif %}
+
+
 
 <script>
     feather.replace();

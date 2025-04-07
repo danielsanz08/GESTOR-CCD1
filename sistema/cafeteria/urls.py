@@ -5,9 +5,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 app_name = 'cafeteria'
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
-     path('login/cafeteria/', views.login_papeleria, name='login_cafeteria'),
-    path('logout_caf/', views.logout_view, name='logout_caf'),
+    path('index_caf/', views.index_caf, name='index_caf'),
+    path('login/cafeteria/', views.login_cafeteria, name='login_cafeteria'),
+    path('logout_caf/', views.logout_caf, name='logout_caf'),
 ]
 
 if settings.DEBUG:

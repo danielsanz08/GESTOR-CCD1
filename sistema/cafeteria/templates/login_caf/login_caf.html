@@ -1,10 +1,52 @@
 {% extends 'navbar.html' %}
 {% load static%}
 {% block contenido %}
+<style>
+     .alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Desvanecer después de 5 segundos */
+.alert {
+    animation: fadeIn 0.5s ease-in-out forwards, fadeOut 0.5s ease-in-out 4.5s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+</style>
 <link rel="stylesheet" href="{% static 'css/login_pap.css' %}?v={% now 'U' %}">
 <form method="POST" action="{% url 'cafeteria:login_cafeteria' %}" class="login">
     <h3><i data-feather="user"></i>
-        Iniciar sesión - Módulo papeleria</h3>
+        Iniciar sesión - Módulo Cafeteria</h3>
     {% csrf_token %}
     <div class="form-group">
         <label for="email">Correo Electrónico</label>
@@ -20,5 +62,11 @@
         <a href="{% url 'libreria:password_reset' %}">¿Olvidaste la contraseña?</a>
     </div>
 </form>
-
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert" style="color: rgb(255, 0, 0); font-weight: bold; background-color: rgb(245, 134, 134); width: 40vh; align-items: center; left: 85vh; position: absolute; top: 20vh;"  >
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}

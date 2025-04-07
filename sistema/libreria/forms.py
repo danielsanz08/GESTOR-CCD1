@@ -1,6 +1,5 @@
 from django import forms
 from .models import CustomUser
-from django.contrib.auth import authenticate
 class CustomUserForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}),
@@ -45,3 +44,27 @@ class CustomUserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+class CustomUserEditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'role', 'cargo', 'module']
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserEditForm, self).__init__(*args, **kwargs)
+
+        # Hace que los campos sean opcionales
+        for field in self.fields:
+            self.fields[field].required = False
+
+        # Agrega clases CSS
+        self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Nombre de usuario'})
+        self.fields['email'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Correo electrónico'})
+        self.fields['role'].widget.attrs.update({'class': 'form-select'})
+        self.fields['module'].widget.attrs.update({'class': 'form-select'})
+        self.fields['cargo'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Cargo'})
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            return self.instance.email  # Mantiene el valor anterior si no se cambia
+        return email

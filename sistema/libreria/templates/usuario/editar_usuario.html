@@ -1,0 +1,39 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block titulo %}Editar usuario{% endblock %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/editar_usuario.css' %}?v={% now 'U' %}">
+
+<div class="formulario">
+    <h1>Editar usuario</h1>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="username">Nombre de usuario</label>
+            <br>{{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="email">Correo Electrónico</label>
+            <br>{{ form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="role">Rol</label>
+            <br>{{ form.role }}
+        </div>
+        <div class="mb-3">
+            <label for="role">Rol</label>
+            <br>{{ form.role }}
+        </div>
+        <div class="mb-3">
+            <label for="module">Módulo:</label>
+            <br>{{ form.module }}
+        </div>
+        
+        <!-- 🔹 Botón de envío correcto -->
+        <button type="submit"  class="btn">Editar</button>
+
+    </form>
+</div>
+{% endblock %}

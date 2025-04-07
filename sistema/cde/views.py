@@ -1,5 +1,10 @@
 from django.shortcuts import render
-
+from cde.forms import LoginForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib.auth import get_user_model
 # Create your views here.
 def login_cde(request):
     if request.method == 'POST':
@@ -13,7 +18,7 @@ def login_cde(request):
                 if user.module == 'Centro de eventos':  # Verifica que el usuario pertenece a CDE
                     login(request, user)
                     messages.success(request, "Sesión iniciada correctamente en CDE.")
-                    return redirect('index_cde')  # Redirige a la página de inicio de CDE
+                    return redirect('cde:index_cde')  # Redirige a la página de inicio de CDE
                 else:
                     messages.error(request, "No tienes acceso a este módulo.")
             else:
@@ -21,9 +26,9 @@ def login_cde(request):
     else:
         form = LoginForm()
 
-    return render(request, 'cde//login/login_cde.html', {'form': form})
+    return render(request, 'login_cde/login_cde.html', {'form': form})
 
-def logout_caf(request):
+def logout_cde(request):
     logout(request)
     messages.success(request, "Has cerrado sesión correctamente.")
     return redirect(reverse('libreria:inicio'))

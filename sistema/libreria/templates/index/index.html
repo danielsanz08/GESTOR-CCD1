@@ -1,7 +1,7 @@
 {% extends "navbar.html" %}
 {% load static %}
 {% block titulo %}
-  CCD
+  GESTOR CCD
 {% endblock %}
 
 {% block contenido %}
@@ -10,22 +10,26 @@
     <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
   </div>  <!-- Agregar el fondo al inicio -->
   
-  <a href="{% url 'libreria:login_papeleria' %}  "><div class="container">
+  <a href="{% url 'papeleria:login_papeleria' %}  "><div class="container">
     <div class="card">
       <img src="https://previews.123rf.com/images/itakdalee/itakdalee1609/itakdalee160900037/63681824-papeler%C3%ADa-escolar-sobre-un-fondo-blanco-de-madera-y-espacio-para-texto.jpg" alt="Imagen de la tarjeta">
       <h2>Papeleria</h2>
       <p>Ingresa para gestión el módulo de papeleria</p>
     </div></a>
-    <div class="card">
-      <img src="https://pqs.pe/wp-content/uploads/2016/08/pqs-como-abrir-cafeteria-800x533.jpg" alt="Imagen de la tarjeta">
-      <h2>Cafetería</h2>
-      <p>Ingresa para gestionar la Cafetería</p>
-    </div>
-    <div class="card">
-      <img src="https://eltesoro.com.co/wp-content/uploads/2020/08/hall-2-banquete-capacidad-70px.jpg" alt="Imagen de la tarjeta">
-      <h2>Centro de eventos</h2>
-      <p>Ingresa para gestionar centro de eventos</p>
-    </div>
+    <a href="{% url 'cafeteria:login_cafeteria' %}">
+      <div class="card">
+        <img src="https://pqs.pe/wp-content/uploads/2016/08/pqs-como-abrir-cafeteria-800x533.jpg" alt="Imagen de la tarjeta">
+        <h2>Cafetería</h2>
+        <p>Ingresa para gestionar la Cafetería</p>
+      </div>
+    </a>
+    <a href="{% url 'cde:login_cde' %}">
+      <div class="card">
+        <img src="https://eltesoro.com.co/wp-content/uploads/2020/08/hall-2-banquete-capacidad-70px.jpg" alt="Imagen de la tarjeta">
+        <h2>Centro de eventos</h2>
+        <p>Ingresa para gestionar centro de eventos</p>
+      </div>
+    </a>
     
     <div class="card">
       <img src="https://static.vecteezy.com/system/resources/previews/013/259/795/non_2x/tiny-people-with-guide-instructions-or-handbooks-cartoon-characters-reading-user-manual-guidebook-or-guidance-help-and-book-with-instructions-for-use-concept-vector.jpg" alt="Imagen de la tarjeta">

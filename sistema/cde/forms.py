@@ -1,3 +1,7 @@
+from django import forms
+from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
+from libreria.models import CustomUser
 class LoginForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'})

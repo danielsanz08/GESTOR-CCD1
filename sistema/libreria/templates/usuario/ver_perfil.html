@@ -1,0 +1,43 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block titulo %}Ver perfil{% endblock %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/ver_perfil.css' %}?v={% now 'U' %}"> 
+
+<div class="fondo">
+    <img src="{% static 'imagen/LOGO.png' %}" alt="Logo CCD">
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="nombre">
+            <label for="username">Nombre de usuario :</label>
+            {{ user.username }}
+        </div>
+        <div class="rol">
+            <label for="role">Rol: </label>
+            {{ user.role }}
+        </div>
+        <div class="email">
+            <label for="email">Correo:</label>
+            {{ user.email }}
+        </div>
+        <div class="cargo">
+            <label for="cargo">Cargo:</label>
+            {{ user.cargo }}
+        </div>
+        <div class="cargo">
+            <label for="module">Módulo:</label>
+            {{ user.module }}
+        </div>
+        <div class="botones">
+            <a href="{% url 'libreria:editar_usuario' user.id %}"><button class="editar">Editar usuario</button></a>
+            
+            <a href="{% url 'papeleria:index_pap' %}"><button class="atras">Atrás</button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

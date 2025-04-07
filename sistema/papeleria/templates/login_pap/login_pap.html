@@ -2,7 +2,7 @@
 {% load static%}
 {% block contenido %}
 <link rel="stylesheet" href="{% static 'css/login_pap.css' %}?v={% now 'U' %}">
-<form method="POST" action="{% url 'libreria:login_papeleria' %}" class="login">
+<form method="POST" action="{% url 'papeleria:login_papeleria' %}" class="login">
     <h3><i data-feather="user"></i>
         Iniciar sesión - Módulo papeleria</h3>
     {% csrf_token %}

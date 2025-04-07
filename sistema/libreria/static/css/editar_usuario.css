@@ -1,0 +1,46 @@
+html{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formulario{
+    
+    top: 20vh;
+    position: relative;
+    width: 70vh;
+    padding: 30px 30px 30px 30px;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(19, 104, 161, 0.411);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+input, .form-select, .form-control{
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+    border-radius: 20px;
+    height: 5vh;
+    border: none;
+    width: 50vh;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+input:hover, .form-select:hover, .form-control:hover{
+    background-color: rgb(219, 218, 218);
+}
+.btn{
+    background-color: rgb(51, 104, 248);
+    color: white;
+    font-weight: bold;
+    border: none;
+    height: 6vh;
+    width: 35vh;
+    border-radius: 20px;
+    position: relative;
+    left: 3.5vh;
+    
+}
+.btn:hover{
+    background-color: rgb(33, 74, 187);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
