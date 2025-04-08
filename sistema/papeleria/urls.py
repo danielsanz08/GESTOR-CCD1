@@ -14,6 +14,9 @@ urlpatterns = [
     path('eliminar_articulo/<int:id>', views.eliminar_articulo, name='eliminar_articulo'),
     path('verificar-nombre-articulo/', views.verificar_nombre_articulo, name='verificar_nombre_articulo'),
     path('validar_datos/', views.validar_datos, name='validar_datos'),
+    
+     path('reporte_articulo_pdf/', views.reporte_articulo_pdf, name='reporte_articulo_pdf'),
+    path('reporte_articulo_excel/', views.reporte_articulo_excel, name='reporte_articulo_excel'),
 ]
 
 if settings.DEBUG:

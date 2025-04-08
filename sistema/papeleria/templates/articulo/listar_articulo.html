@@ -13,8 +13,8 @@
     </form>
 <div class="Bototnes">
     <button class="print"><i data-feather="printer"class="icono "></i></button>
-    <button class="pdf">PDF</button>
-    <button class="excel">Excel</button>
+    <a href="{% url 'papeleria:reporte_articulo_pdf' %}"><button class="pdf">PDF</button></a>
+    <a href="{% url 'papeleria:reporte_articulo_excel' %}"><button class="excel">Excel</button></a>
 </div>
 <h1>Articulos de papeleria</h1>
 <table>
