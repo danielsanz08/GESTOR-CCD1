@@ -29,7 +29,7 @@
 
 /* BOTÓN DE ACCESIBILIDAD */
 #toggle-accessibility-menu {
-    background-color: #001f3f;
+    background-color: #1c96bb00;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -37,7 +37,7 @@
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    
     transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
     position: fixed;
     bottom: 65px;
@@ -48,7 +48,7 @@
 }
 
 #toggle-accessibility-menu:hover {
-    background-color: #000a14;
+    background-color: #1C97BB;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
@@ -192,7 +192,7 @@ footer {
     left: 0;
     width: 100%;
     height: 10px;
-    background-color: #001f3f;
+    background-color: #1C97BB;
     color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;

@@ -14,6 +14,44 @@ section{
     border-radius: 20px;
     
 }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background: rgb(19, 104, 161);
+  width: 40%;
+  text-align: center;
+  padding: 30px;
+  border-radius: 40px;
+  position: absolute;
+  left: 65vh;
+  top: 40vh;
+}
+
+.btn-delete {
+  background-color: rgb(51, 104, 248);
+  color: white;
+  font-weight: bold;
+  border: none;
+  height: 6vh;
+  width: 35vh;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.btn-delete:hover {
+  background-color: rgb(39, 80, 192);
+}
 table{
     width: 180vh;
     border-spacing: 10px;

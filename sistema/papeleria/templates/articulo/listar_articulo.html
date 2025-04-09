@@ -42,7 +42,10 @@
         <td>{{ articulo.fecha_registro }}</td>
         <td>
             <a href="{% url 'papeleria:editar_articulo' articulo.id %}"><button class="editar-btn"><i data-feather="edit" class="icono"></i></button></a>
-            <a href="{% url 'papeleria:eliminar_articulo' articulo.id %}"><button class="eliminar-btn"><i data-feather="trash-2" class="icono"></i></button></a>
+            <button class="eliminar-btn" onclick="mostrarModal('{{ articulo.id }}')">
+                <i data-feather="trash-2" class="icono"></i>
+            </button>
+            
         </td>
     </tr>
         {% empty %}
@@ -69,7 +72,16 @@
         <a href="?page={{ articulos.next_page_number }}" class="next">Siguiente</a>
     {% endif %}
 </div>
-
+<div id="modoEliminar" class="modal" style="display: none;">
+    <div class="modal-contenido">
+        <h2>¿Estás seguro de eliminar este articulo'</h2>
+        <form id="formEliminar" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete">Eliminar</button>
+            <button class="btn-delete" type="button" onclick="cerrarModal()" >Cancelar</button>
+        </form>
+    </div>
+</div>
 </section>
 <script>
     function buscarArticulo(){
@@ -101,5 +113,16 @@
         })
         .catch(error => console.error(error));
     }
+
+function mostrarModal(id){
+    const modal = document.getElementById("modoEliminar");
+    const formEliminar = document.getElementById("formEliminar");
+    formEliminar.action = `{% url 'papeleria:eliminar_articulo' 0 %}`.replace(/0/, id);
+    modal.style.display = "block";
+}
+function cerrarModal(){
+    const modal = document.getElementById("modoEliminar");
+    modal.style.display = "none";
+}
 </script>
 {% endblock%}
