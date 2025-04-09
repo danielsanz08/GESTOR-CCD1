@@ -16,12 +16,13 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
+
 from django.http import JsonResponse
 from django.db.models import Q
 from django.core.paginator import Paginator
 # Create your views here.
 # Página de inicio
+User = get_user_model()
 def inicio(request):
     return render(request, 'index/index.html')
 
@@ -142,14 +143,16 @@ def password_reset_request(request):
             message = render_to_string("password_reset_email.html", {"reset_link": reset_link})
             send_mail(subject, message, "noreply@tuweb.com", [user.email])
 
-            return redirect(reverse("libreria:password_reset_done") + "?sent=true")  # Indica que el correo fue enviado
+            return redirect(reverse("libreria:password_reset_done") + "?sent=true")
         except User.DoesNotExist:
-            return redirect(reverse("libreria:password_reset_done") + "?sent=false")  # Indica que el correo no existe
+            return redirect(reverse("libreria:password_reset_done") + "?sent=false")
 
     return render(request, "password_reset.html")
 
+
 def password_reset_done(request):
     return render(request, "password_reset_done.html")
+
 
 def password_reset_confirm(request, uidb64, token):
     try:
@@ -165,10 +168,11 @@ def password_reset_confirm(request, uidb64, token):
                 form.save()
                 return redirect(reverse("libreria:password_reset_complete"))
         else:
-            form = SetPasswordForm(user)  # Asegura que el formulario se pase correctamente
+            form = SetPasswordForm(user)
         return render(request, "password_reset_confirm.html", {"form": form})
     else:
         return render(request, "password_reset_confirm.html", {"error": "El enlace no es válido o ha expirado."})
+
 
 def password_reset_complete(request):
     return render(request, "password_reset_complete.html")
