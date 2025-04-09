@@ -39,8 +39,8 @@ section{
 }
 
 .btn-delete {
-  background-color: rgb(51, 104, 248);
-  color: white;
+  background-color: rgb(252, 6, 6);
+  color: rgb(0, 0, 0);
   font-weight: bold;
   border: none;
   height: 6vh;
@@ -48,9 +48,22 @@ section{
   border-radius: 20px;
   margin: 10px;
 }
-
+.back {
+  background-color: rgb(252, 248, 6);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border: none;
+  height: 6vh;
+  width: 35vh;
+  border-radius: 20px;
+  margin: 10px;
+}
 .btn-delete:hover {
-  background-color: rgb(39, 80, 192);
+  background-color: rgb(187, 9, 9);
+  
+}
+.back:hover {
+  background-color: rgb(177, 174, 4);
 }
 table{
     width: 180vh;
